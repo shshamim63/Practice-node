@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const { demandOption } = require('yargs');
 const yargs = require('yargs');
 const notes = require('./notes');
 
@@ -25,8 +26,15 @@ yargs.command({
 yargs.command({
   command: "remove",
   describe: "Removing a new note",
+  builder: {
+    title: {
+      describe: "note title",
+      demandOption: true,
+      type: 'string'
+    }
+  },
   handler(argv){
-    notes.removeNote(argv.titlre);
+    notes.removeNote(argv.title);
   }
 })
 
@@ -34,15 +42,8 @@ yargs.command({
 yargs.command({
   command: "list",
   describe: "Return list of notes",
-  builder: {
-    title: {
-      describe: "Is the title of each contex",
-      demandOption: true,
-      type: 'string'
-    }
-  },
   handler(){
-    notes.getNotes();
+    console.log(notes.getNotes())
   }
 })
 
@@ -57,7 +58,7 @@ yargs.command({
     }
   },
   handler(argv){
-    notes.showNote(argv.title);
+    console.log(notes.showNote(argv.title))
   }
 })
 
