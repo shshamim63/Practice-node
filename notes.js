@@ -4,8 +4,9 @@ const fs = require('fs')
 const addNote = (title, body) => {
   const notes = loadNotes()
   const duplicate = notes.find((note) => (note.title === title))
+
   if(duplicate) {
-    console.log("Dulpicate")
+    console.log(chalk.red.inverse("Dulpicate"))
   } else {
     notes.push({
       title: title,
